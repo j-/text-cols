@@ -81,14 +81,15 @@ function handleDragging () {
 
 function handleStartDragging () {
 	initialCols = currentCols;
+	document.body.classList.add('cursor-col-resize');
 }
 
 function handleCancelDragging () {
 	setCols(initialCols, true);
 }
 
-function handleDropping () {
-
+function handleStopDragging () {
+	document.body.classList.remove('cursor-col-resize');
 }
 
 /* DRAG INTERNALS */
@@ -119,10 +120,15 @@ function updatePosition (e) {
 }
 
 function finalizePosition (e) {
-	destroyDragListeners();
+	endDragging();
 }
 
 function resetPosition () {
+	endDragging();
+}
+
+function endDragging () {
+	handleStopDragging();
 	destroyDragListeners();
 }
 
@@ -163,6 +169,9 @@ body {
 	margin: 0;
 	padding: 0;
 	font: 16px Arial, sans-serif;
+}
+.cursor-col-resize * {
+	cursor: col-resize !important;
 }
 #app {
 	min-height: 100vh;
