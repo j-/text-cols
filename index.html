@@ -8,7 +8,7 @@
 		<form id="config">
 			<div class="form-group">
 				<label for="config-cols">Cols</label>
-				<input id="config-cols" type="number" min="1" value="80">
+				<input id="config-cols" type="number" min="1">
 			</div>
 		</form>
 	</section>
@@ -22,12 +22,18 @@
 <script>
 (function () {
 
+var currentCols = 80;
+
 function measureText (text, font) {
 	measureTextContext.font = font;
 	return measureTextContext.measureText(text).width;
 }
 
-function setCols (cols) {
+function setCols (cols, updateInput) {
+	currentCols = cols;
+	if (updateInput) {
+		inputCols.value = cols;
+	}
 	inputText.style.width = (CHAR_WIDTH * cols) + 'px';
 }
 
@@ -37,7 +43,7 @@ function getCols () {
 
 function resizeCols () {
 	const cols = getCols();
-	setCols(cols);
+	setCols(cols, false);
 }
 
 const measureTextCanvas = document.createElement('canvas');
@@ -49,12 +55,102 @@ const CHAR_WIDTH = measureText(TEST_CHAR, INPUT_FONT);
 
 const inputCols = document.getElementById('config-cols');
 const inputText = document.getElementById('text-input');
+const dragHandle = document.querySelector('#section-splitter > .drag-handle');
 
 inputText.style.font = INPUT_FONT;
 
 inputCols.addEventListener('input', resizeCols);
 
-resizeCols();
+setCols(currentCols, true);
+
+/* DRAG HANDLE */
+
+var initialWidth = null;
+var initialX = null;
+var initialY = null;
+var initialOffsetX = null;
+var initialOffsetY = null;
+var currentX = null;
+var currentY = null;
+
+function handleDragging () {
+	var newWidth = Math.max(currentX, 0);
+	newWidth = Math.round(newWidth / CHAR_WIDTH);
+	setCols(newWidth, true);
+}
+
+function handleStartDragging () {
+	initialCols = currentCols;
+}
+
+function handleCancelDragging () {
+	setCols(initialCols, true);
+}
+
+function handleDropping () {
+
+}
+
+/* DRAG INTERNALS */
+
+function cancelDrag () {
+	resetPosition();
+	handleCancelDragging();
+}
+
+function handleKeydown (e) {
+	if (e.which === 0x1b) {
+		cancelDrag();
+	}
+}
+
+function initializePosition (e) {
+	initialOffsetX = e.offsetX;
+	initialOffsetY = e.offsetY;
+	initialX = e.clientX - initialOffsetX;
+	initialY = e.clientY - initialOffsetY;
+	handleStartDragging();
+}
+
+function updatePosition (e) {
+	currentX = e.clientX - initialOffsetX;
+	currentY = e.clientY - initialOffsetY;
+	handleDragging();
+}
+
+function finalizePosition (e) {
+	destroyDragListeners();
+}
+
+function resetPosition () {
+	destroyDragListeners();
+}
+
+function handleMousemove (e) {
+	updatePosition(e);
+}
+
+function handleMouseup (e) {
+	finalizePosition(e);
+}
+
+function destroyDragListeners () {
+	window.removeEventListener('keydown', handleKeydown);
+	window.removeEventListener('mousemove', handleMousemove);
+	window.removeEventListener('mouseup', handleMouseup);
+}
+
+function setupDragListeners () {
+	window.addEventListener('keydown', handleKeydown);
+	window.addEventListener('mousemove', handleMousemove);
+	window.addEventListener('mouseup', handleMouseup);
+}
+
+dragHandle.addEventListener('mousedown', function (e) {
+	e.preventDefault();
+	initializePosition(e);
+	setupDragListeners();
+});
 
 })();
 </script>
