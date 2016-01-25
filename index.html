@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<title>Text cols</title>
+
+<div id="app">
+	<section id="section-config">
+		<form id="config">
+			<div class="form-group">
+				<label for="config-cols">Cols</label>
+				<input id="config-cols" type="number" min="1" value="80">
+			</div>
+		</form>
+	</section>
+	<section id="section-splitter">
+		<textarea id="text-input" class="pane pane-left" placeholder="Type here..."></textarea>
+		<div class="drag-handle"></div>
+		<section class="pane pane-right"></section>
+	</section>
+</div>
+
+<script>
+(function () {
+
+function measureText (text, font) {
+	measureTextContext.font = font;
+	return measureTextContext.measureText(text).width;
+}
+
+function setCols (cols) {
+	inputText.style.width = (CHAR_WIDTH * cols) + 'px';
+}
+
+function getCols () {
+	return Number(inputCols.value);
+}
+
+function resizeCols () {
+	const cols = getCols();
+	setCols(cols);
+}
+
+const measureTextCanvas = document.createElement('canvas');
+const measureTextContext = measureTextCanvas.getContext('2d');
+
+const INPUT_FONT = '18px monospace';
+const TEST_CHAR = String.fromCharCode(0x20); // Space
+const CHAR_WIDTH = measureText(TEST_CHAR, INPUT_FONT);
+
+const inputCols = document.getElementById('config-cols');
+const inputText = document.getElementById('text-input');
+
+inputText.style.font = INPUT_FONT;
+
+inputCols.addEventListener('input', resizeCols);
+
+resizeCols();
+
+})();
+</script>
+
+<style>
+html,
+body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	font: 16px Arial, sans-serif;
+}
+#app {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+#section-config {
+	height: 50px;
+}
+#section-splitter {
+	flex-grow: 1;
+}
+
+#section-config {
+	line-height: 50px;
+	border-bottom: 1px solid #ccc;
+	z-index: 2;
+}
+#config > .form-group > label,
+#config-cols {
+	font-size: 2em;
+}
+#config > .form-group > label {
+	padding: 0 1em;
+	font-weight: bold;
+}
+
+#section-splitter {
+	display: flex;
+	flex-direction: row;
+}
+#section-splitter > .pane-right {
+	flex-grow: 1;
+	background: #ddd url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAHElEQVQokWP4//+/MS7MgA+MaqSFxsHlmpGuEQByazhwczcltgAAAABJRU5ErkJggg==) top right;
+}
+#section-splitter > .drag-handle {
+	width: 8px;
+	background-color: #ddd;
+	cursor: col-resize;
+	border-left: 1px solid #eee;
+	border-right: 1px solid #ccc;
+}
+
+#text-input {
+	border: none;
+	resize: none;
+	outline: none;
+	margin: 0;
+	padding: 0.5em 0;
+	overflow: hidden;
+}
+</style>
