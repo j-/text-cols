@@ -153,6 +153,9 @@ function setupDragListeners () {
 }
 
 dragHandle.addEventListener('mousedown', function (e) {
+	if (e.which !== 1) {
+		return;
+	}
 	e.preventDefault();
 	initializePosition(e);
 	setupDragListeners();
