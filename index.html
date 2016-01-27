@@ -168,7 +168,7 @@ function drawHorizontalRuler (ctx, width, height, ticks) {
 	const tickWidth = width / numTicks;
 	var x, y;
 	for (var i = 0; i < numTicks; i++) {
-		x = i * tickWidth;
+		x = (i + 1) * tickWidth;
 		y = height - ticks[i];
 		ctx.beginPath();
 		ctx.moveTo(x, y);
@@ -189,7 +189,7 @@ function arrTimes (arr, times) {
 const RULERS_TO_RENDER = 100;
 const RULER_WIDTH = CHAR_WIDTH * 5 * RULERS_TO_RENDER;
 const RULER_HEIGHT = 10;
-const RULER_TICKS = arrTimes([10, 5, 5, 5, 5], RULERS_TO_RENDER);
+const RULER_TICKS = arrTimes([5, 5, 5, 5, 10], RULERS_TO_RENDER);
 const RULER_TICK_COLOR = '#ccc';
 
 const horizontalRulerCanvas = document.createElement('canvas');
@@ -199,6 +199,7 @@ horizontalRulerCanvas.width = RULER_WIDTH;
 horizontalRulerCanvas.height = RULER_HEIGHT;
 
 horizontalRulerContext.strokeStyle = RULER_TICK_COLOR;
+horizontalRulerContext.translate(0.5, 0);
 
 drawHorizontalRuler(
 	horizontalRulerContext,
@@ -263,7 +264,7 @@ body {
 	width: 8px;
 	background-color: #ddd;
 	cursor: col-resize;
-	border-left: 1px solid #eee;
+	border-left: 1px solid #ccc;
 	border-right: 1px solid #ccc;
 }
 
