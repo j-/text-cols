@@ -58,6 +58,7 @@ const inputText = document.getElementById('text-input');
 const dragHandle = document.querySelector('#section-splitter > .drag-handle');
 
 inputText.style.font = INPUT_FONT;
+dragHandle.style.width = (CHAR_WIDTH / 2) + 'px';
 
 inputCols.addEventListener('input', resizeCols);
 
