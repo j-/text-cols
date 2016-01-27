@@ -31,6 +31,7 @@ function measureText (text, font) {
 
 function setCols (cols, updateInput) {
 	currentCols = cols;
+	localStorage.setItem(STORAGE_KEY_COLS, cols);
 	if (updateInput) {
 		inputCols.value = cols;
 	}
@@ -49,6 +50,9 @@ function resizeCols () {
 const measureTextCanvas = document.createElement('canvas');
 const measureTextContext = measureTextCanvas.getContext('2d');
 
+const STORAGE_KEY_TEXT = 'app-text-value';
+const STORAGE_KEY_COLS = 'app-cols-value';
+
 const INPUT_FONT = '18px monospace';
 const TEST_CHAR = String.fromCharCode(0x20); // Space
 const CHAR_WIDTH = measureText(TEST_CHAR, INPUT_FONT);
@@ -61,6 +65,20 @@ inputText.style.font = INPUT_FONT;
 dragHandle.style.width = (CHAR_WIDTH / 2) + 'px';
 
 inputCols.addEventListener('input', resizeCols);
+
+const localStorageCols = localStorage.getItem(STORAGE_KEY_COLS)
+if (localStorageCols) {
+	currentCols = localStorageCols;
+}
+
+const localStorageText = localStorage.getItem(STORAGE_KEY_TEXT);
+if (localStorageText) {
+	inputText.value = localStorageText;
+}
+
+inputText.addEventListener('input', function () {
+	localStorage.setItem(STORAGE_KEY_TEXT, inputText.value);
+});
 
 setCols(currentCols, true);
 
