@@ -10,6 +10,10 @@
 				<label for="config-cols">Cols</label>
 				<input id="config-cols" type="number" min="1">
 			</div>
+			<div class="form-group">
+				<label for="config-tabwidth">Tab width</label>
+				<input id="config-tabwidth" type="number" min="1">
+			</div>
 		</form>
 	</section>
 	<section id="section-splitter">
@@ -52,6 +56,7 @@ const measureTextContext = measureTextCanvas.getContext('2d');
 
 const STORAGE_KEY_TEXT = 'app-text-value';
 const STORAGE_KEY_COLS = 'app-cols-value';
+const STORAGE_KEY_TABS = 'app-tabs-value';
 
 const INPUT_FONT = '18px/1 monospace';
 const TEST_CHAR = String.fromCharCode(0x20); // Space
@@ -59,6 +64,7 @@ const CHAR_WIDTH = measureText(TEST_CHAR, INPUT_FONT);
 const CHAR_HEIGHT = 18;
 
 const inputCols = document.getElementById('config-cols');
+const inputTabwidth = document.getElementById('config-tabwidth');
 const inputText = document.getElementById('text-input');
 const dragHandle = document.querySelector('#section-splitter > .drag-handle');
 
@@ -276,6 +282,34 @@ const horizontalLinesDataURL = gridLineSectionCanvas.toDataURL();
 
 inputText.style.backgroundImage = 'url("' + vertialLinesDataURL + '"), url("' + horizontalLinesDataURL + '")';
 
+/* TAB WIDTH */
+
+var currentTabWidth = 4;
+
+const localStorageTabWidth = localStorage.getItem(STORAGE_KEY_TABS);
+if (localStorageTabWidth) {
+	currentTabWidth = localStorageTabWidth;
+}
+
+function setTabWidth (width) {
+	localStorage.setItem(STORAGE_KEY_TABS, width);
+	inputText.style.tabSize = width;
+	inputTabwidth.value = width;
+}
+
+function getTabWidth () {
+	return Number(inputTabwidth.value);
+}
+
+function updateTabWidth () {
+	const width = getTabWidth();
+	setTabWidth(width);
+}
+
+inputTabwidth.addEventListener('input', updateTabWidth);
+
+setTabWidth(currentTabWidth);
+
 })();
 </script>
 
@@ -311,8 +345,12 @@ body {
 	border-bottom: 1px solid #ccc;
 	z-index: 2;
 }
+#config > .form-group {
+	display: inline-block;
+}
 #config > .form-group > label,
-#config-cols {
+#config-cols,
+#config-tabwidth {
 	font-size: 1em;
 }
 #config > .form-group > label {
