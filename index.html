@@ -56,6 +56,7 @@ const STORAGE_KEY_COLS = 'app-cols-value';
 const INPUT_FONT = '18px/1 monospace';
 const TEST_CHAR = String.fromCharCode(0x20); // Space
 const CHAR_WIDTH = measureText(TEST_CHAR, INPUT_FONT);
+const CHAR_HEIGHT = 18;
 
 const inputCols = document.getElementById('config-cols');
 const inputText = document.getElementById('text-input');
@@ -231,13 +232,19 @@ document.getElementById('config').style.backgroundImage = 'url(' + rulerDataURL 
 
 /* GRID LINES */
 
-function drawGridLineSection (ctx, tickWidth, numTicks) {
+function drawVerticalGridLineSection (ctx, tickWidth, numTicks) {
 	var x;
 	for (var i = 0; i < numTicks; i++) {
 		x = (i + 1) * tickWidth;
-		ctx.beginPath();
 		ctx.fillRect(x, 0, 1, 1);
-		ctx.closePath();
+	}
+}
+
+function drawHorizontalGridLineSection (ctx, tickHeight, numTicks) {
+	var y;
+	for (var i = 0; i < numTicks; i++) {
+		y = (i + 1) * tickHeight;
+		ctx.fillRect(0, y, 1, 1);
 	}
 }
 
@@ -253,10 +260,21 @@ gridLineSectionCanvas.height = 1;
 gridLineSectionContext.fillStyle = GRID_LINE_COLOR;
 gridLineSectionContext.translate(0.5, 0);
 
-drawGridLineSection(gridLineSectionContext, CHAR_WIDTH, GRID_LINES_TO_RENDER);
+drawVerticalGridLineSection(gridLineSectionContext, CHAR_WIDTH, GRID_LINES_TO_RENDER);
 
-const gridDataURL = gridLineSectionCanvas.toDataURL();
-inputText.style.backgroundImage = 'url(' + gridDataURL + ')';
+const vertialLinesDataURL = gridLineSectionCanvas.toDataURL();
+
+gridLineSectionCanvas.width = 1;
+gridLineSectionCanvas.height = CHAR_HEIGHT * GRID_LINES_TO_RENDER;
+
+gridLineSectionContext.fillStyle = GRID_LINE_COLOR;
+gridLineSectionContext.translate(0, 1.5);
+
+drawHorizontalGridLineSection(gridLineSectionContext, CHAR_HEIGHT, GRID_LINES_TO_RENDER);
+
+const horizontalLinesDataURL = gridLineSectionCanvas.toDataURL();
+
+inputText.style.backgroundImage = 'url("' + vertialLinesDataURL + '"), url("' + horizontalLinesDataURL + '")';
 
 })();
 </script>
@@ -340,7 +358,7 @@ body {
 	padding: 0;
 	overflow: hidden;
 	background-color: #fff;
-	background-position: top left;
+	background-position: top left, top left;
 }
 
 #config {
