@@ -62,7 +62,6 @@ const inputText = document.getElementById('text-input');
 const dragHandle = document.querySelector('#section-splitter > .drag-handle');
 
 inputText.style.font = INPUT_FONT;
-dragHandle.style.width = (CHAR_WIDTH / 2) + 'px';
 
 inputCols.addEventListener('input', resizeCols);
 
@@ -280,11 +279,25 @@ body {
 	background: #ddd url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAHElEQVQokWP4//+/MS7MgA+MaqSFxsHlmpGuEQByazhwczcltgAAAABJRU5ErkJggg==) top right;
 }
 #section-splitter > .drag-handle {
-	width: 8px;
+	width: 4px;
 	background-color: #ddd;
 	cursor: col-resize;
 	border-left: 1px solid #ccc;
 	border-right: 1px solid #ccc;
+}
+#section-splitter > .drag-handle::before,
+#section-splitter > .drag-handle::after {
+	display: block;
+	width: 5px;
+	height: 100%;
+	content: '';
+	position: absolute;
+}
+#section-splitter > .drag-handle::before {
+	transform: translateX(-6px);
+}
+#section-splitter > .drag-handle::after {
+	transform: translateX(4px);
 }
 
 #text-input {
