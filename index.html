@@ -226,8 +226,37 @@ drawHorizontalRuler(
 	RULER_TICKS
 );
 
-const dataURL = horizontalRulerCanvas.toDataURL();
-document.getElementById('config').style.backgroundImage = 'url(' + dataURL + ')';
+const rulerDataURL = horizontalRulerCanvas.toDataURL();
+document.getElementById('config').style.backgroundImage = 'url(' + rulerDataURL + ')';
+
+/* GRID LINES */
+
+function drawGridLineSection (ctx, tickWidth, numTicks) {
+	var x;
+	for (var i = 0; i < numTicks; i++) {
+		x = (i + 1) * tickWidth;
+		ctx.beginPath();
+		ctx.fillRect(x, 0, 1, 1);
+		ctx.closePath();
+	}
+}
+
+const GRID_LINES_TO_RENDER = 100 * 5;
+const GRID_LINE_COLOR = '#eee';
+
+const gridLineSectionCanvas = document.createElement('canvas');
+const gridLineSectionContext = gridLineSectionCanvas.getContext('2d');
+
+gridLineSectionCanvas.width = CHAR_WIDTH * GRID_LINES_TO_RENDER;
+gridLineSectionCanvas.height = 1;
+
+gridLineSectionContext.fillStyle = GRID_LINE_COLOR;
+gridLineSectionContext.translate(0.5, 0);
+
+drawGridLineSection(gridLineSectionContext, CHAR_WIDTH, GRID_LINES_TO_RENDER);
+
+const gridDataURL = gridLineSectionCanvas.toDataURL();
+inputText.style.backgroundImage = 'url(' + gridDataURL + ')';
 
 })();
 </script>
@@ -308,6 +337,8 @@ body {
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
+	background-color: #fff;
+	background-position: top left;
 }
 
 #config {
