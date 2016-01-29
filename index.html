@@ -245,6 +245,12 @@ drawHorizontalRuler(
 const rulerDataURL = horizontalRulerCanvas.toDataURL();
 rulerHorizontal.style.backgroundImage = 'url(' + rulerDataURL + ')';
 
+rulerHorizontal.addEventListener('mousemove', (e) => {
+	const x = e.offsetX;
+	const i = Math.round(x / CHAR_WIDTH);
+	rulerHorizontal.title = i;
+});
+
 /* GRID LINES */
 
 function drawVerticalGridLineSection (ctx, tickWidth, numTicks) {
@@ -368,8 +374,11 @@ body {
 
 #ruler-horizontal {
 	background-color: #fff;
+	border-top: 1px solid #eee;
 	border-bottom: 1px solid #ccc;
-	height: 10px;
+	height: 20px;
+	background-position: bottom left;
+	background-repeat: repeat-x;
 }
 
 #section-splitter {
