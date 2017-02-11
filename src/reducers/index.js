@@ -2,6 +2,8 @@ import {
 	SET_COLS,
 	SET_TAB_WIDTH,
 	SET_TEXT_CONTENT,
+	SET_FONT_SIZE,
+	SET_FONT_WIDTH,
 } from './types';
 
 const INITIAL_STATE = {
@@ -9,6 +11,7 @@ const INITIAL_STATE = {
 	tabWidth: 4,
 	textContent: '',
 	fontSize: 18,
+	fontWidth: 10.8017578125,
 	lineHeight: 1,
 	tickStyle: '#ccc',
 	gridStyle: '#eee',
@@ -31,6 +34,16 @@ export default (state = INITIAL_STATE, action) => {
 				...state,
 				textContent: action.textContent,
 			};
+		case SET_FONT_SIZE:
+			return {
+				...state,
+				fontSize: action.size,
+			};
+		case SET_FONT_WIDTH:
+			return {
+				...state,
+				fontWidth: action.width,
+			};
 		default:
 			return state;
 	}
@@ -40,6 +53,7 @@ export const getCols = (state) => state.cols;
 export const getTabWidth = (state) => state.tabWidth;
 export const getTextContent = (state) => state.textContent;
 export const getFontSize = (state) => state.fontSize;
+export const getFontWidth = (state) => state.fontWidth;
 export const getLineHeight = (state) => state.lineHeight;
 export const getFontStyle = (state) => {
 	const fontSize = getFontSize(state);

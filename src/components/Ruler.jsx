@@ -4,15 +4,19 @@ export default class Ruler extends Component {
 	constructor (props) {
 		super(props);
 		this.handleMouseMove = this.handleMouseMove.bind(this);
+		this.state = {
+			title: null,
+		};
+	}
 
-		const CHAR_HEIGHT = props.fontSize;
-		const CHAR_WIDTH = 10.8017578125; // TODO: Calculate this
+	drawRuler () {
+		const CHAR_WIDTH = this.props.charWidth;
 
 		const RULERS_TO_RENDER = 100;
 		const RULER_WIDTH = CHAR_WIDTH * 5 * RULERS_TO_RENDER;
 		const RULER_HEIGHT = 10;
 		const RULER_TICKS = arrTimes([5, 5, 5, 5, 10], RULERS_TO_RENDER);
-		const RULER_TICK_COLOR = props.tickStyle;
+		const RULER_TICK_COLOR = this.props.tickStyle;
 
 		const horizontalRulerCanvas = document.createElement('canvas');
 		const horizontalRulerContext = horizontalRulerCanvas.getContext('2d');
@@ -30,23 +34,20 @@ export default class Ruler extends Component {
 			RULER_TICKS
 		);
 
-		this.state = {
-			title: null,
-			charWidth: CHAR_WIDTH,
-			rulerDataURL: horizontalRulerCanvas.toDataURL(),
-		};
+		return horizontalRulerCanvas.toDataURL();
 	}
 
 	handleMouseMove (e) {
 		const x = e.screenX;
-		const i = Math.round(x / this.state.charWidth);
+		const i = Math.round(x / this.props.charWidth);
 		this.setState({
 			title: i,
 		});
 	}
 
 	render () {
-		const { title, rulerDataURL } = this.state;
+		const { title } = this.state;
+		const rulerDataURL = this.drawRuler();
 		return (
 			<div
 				className="ruler ruler-horizontal"
@@ -61,7 +62,7 @@ export default class Ruler extends Component {
 }
 
 Ruler.propTypes = {
-	charHeight: PropTypes.number.isRequired,
+	charWidth: PropTypes.number.isRequired,
 	tickStyle: PropTypes.string.isRequired,
 };
 

@@ -2,12 +2,12 @@ import { connect } from 'react-redux';
 import Ruler from './Ruler';
 
 import {
-	getFontSize,
+	getFontWidth,
 	getTickStyle,
 } from '../reducers';
 
 const connectStateToProps = (state) => ({
-	charHeight: getFontSize(state),
+	charWidth: getFontWidth(state),
 	tickStyle: getTickStyle(state),
 });
 
