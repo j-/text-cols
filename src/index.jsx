@@ -52,12 +52,8 @@ const TEST_CHAR = String.fromCharCode(0x20); // Space
 const CHAR_WIDTH = getTextWidth(TEST_CHAR, INPUT_FONT);
 const CHAR_HEIGHT = getFontSizeFromState(store.getState());
 
-const inputText = document.getElementById('text-input');
 const dragHandle = document.querySelector('#section-splitter > .drag-handle');
 const rulerHorizontal = document.getElementById('ruler-horizontal');
-
-inputText.style.font = INPUT_FONT;
-inputText.value = getTextContentFromState(store.getState());
 
 /* DRAG HANDLE */
 

@@ -46,17 +46,17 @@ export default class Textarea extends Component {
 	}
 
 	render () {
-		const { textContent, setTextContent, cols, fontSize, fontWidth, tabSize } = this.props;
+		const { textContent, setTextContent, cols, fontStyle, fontWidth, tabSize } = this.props;
 		const { backgroundImage } = this.state;
 		const width = cols * fontWidth;
+		const font = fontStyle;
 		return (
 			<textarea
-				id="text-input"
-				className="pane pane-left"
+				className="pane pane-left text-input"
 				placeholder="Type here..."
 				value={ textContent }
 				onChange={ (e) => setTextContent(e.target.value) }
-				style={{ width, backgroundImage, fontSize, tabSize }}
+				style={{ width, backgroundImage, font, tabSize }}
 				spellCheck={ false }
 			/>
 		);
@@ -68,6 +68,7 @@ Textarea.propTypes = {
 	textContent: PropTypes.string.isRequired,
 	setTextContent: PropTypes.func.isRequired,
 	gridStyle: PropTypes.string.isRequired,
+	fontStyle: PropTypes.string.isRequired,
 	fontWidth: PropTypes.number.isRequired,
 	fontSize: PropTypes.number.isRequired,
 	tabSize: PropTypes.number.isRequired,

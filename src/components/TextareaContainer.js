@@ -4,6 +4,7 @@ import Textarea from './Textarea';
 import {
 	getTextContent,
 	getCols,
+	getFontStyle,
 	getFontWidth,
 	getFontSize,
 	getGridStyle,
@@ -17,6 +18,7 @@ import {
 const mapStateToProps = (state) => ({
 	cols: getCols(state),
 	textContent: getTextContent(state),
+	fontStyle: getFontStyle(state),
 	fontWidth: getFontWidth(state),
 	fontSize: getFontSize(state),
 	gridStyle: getGridStyle(state),
