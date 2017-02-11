@@ -6,7 +6,14 @@ export default class Ruler extends Component {
 		this.handleMouseMove = this.handleMouseMove.bind(this);
 		this.state = {
 			title: null,
+			rulerDataURL: this.drawRuler(),
 		};
+	}
+
+	componentWillReceiveProps (props) {
+		this.setState({
+			rulerDataURL: this.drawRuler(),
+		});
 	}
 
 	drawRuler () {
@@ -46,8 +53,7 @@ export default class Ruler extends Component {
 	}
 
 	render () {
-		const { title } = this.state;
-		const rulerDataURL = this.drawRuler();
+		const { title, rulerDataURL } = this.state;
 		return (
 			<div
 				className="ruler ruler-horizontal"
