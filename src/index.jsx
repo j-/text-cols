@@ -33,13 +33,14 @@ const when = (selector, callback, stored = selector()) => (...args) => {
 
 store.subscribe(when(
 	() => getFontStyleFromState(store.getState()),
-	(fontStyle) => {
-		store.dispatch(
-			setFontWidth(
-				getTextWidth(' ', fontStyle)
+	(fontStyle) => store.dispatch(
+		setFontWidth(
+			getTextWidth(
+				'\xa0', // Non-breaking space character
+				fontStyle
 			)
 		)
-	}
+	)
 ));
 
 ReactDOM.render(
