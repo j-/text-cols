@@ -1,5 +1,6 @@
 import React from 'react';
 import Ruler from './RulerContainer';
+import Textarea from './Textarea';
 
 const App = () => (
 	<div className="app">
@@ -17,7 +18,7 @@ const App = () => (
 		</section>
 		<Ruler />
 		<section id="section-splitter">
-			<textarea id="text-input" className="pane pane-left" placeholder="Type here..."></textarea>
+			<Textarea />
 			<div className="drag-handle"></div>
 			<section className="pane pane-right"></section>
 		</section>
