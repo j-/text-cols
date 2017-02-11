@@ -1,0 +1,108 @@
+
+html,
+body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	font: 16px Arial, sans-serif;
+}
+.cursor-col-resize * {
+	cursor: col-resize !important;
+}
+#app {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+#section-config {
+	height: 50px;
+}
+#section-splitter {
+	flex-grow: 1;
+	position: relative;
+	overflow: hidden;
+}
+
+#section-config {
+	line-height: 50px;
+	background-color: #fff;
+	z-index: 2;
+}
+#config > .form-group {
+	display: inline-block;
+}
+#config > .form-group > label,
+#config-cols,
+#config-tabwidth {
+	font-size: 1em;
+}
+#config > .form-group > label {
+	padding: 0 1em;
+	font-weight: bold;
+}
+
+#ruler-horizontal {
+	background-color: #fff;
+	border-top: 1px solid #eee;
+	border-bottom: 1px solid #ccc;
+	height: 20px;
+	background-position: bottom left;
+	background-repeat: repeat-x;
+}
+
+#section-splitter {
+	display: flex;
+	flex-direction: row;
+}
+#section-splitter > .pane-right {
+	flex-grow: 1;
+	background: #ddd url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAHElEQVQokWP4//+/MS7MgA+MaqSFxsHlmpGuEQByazhwczcltgAAAABJRU5ErkJggg==) top right;
+}
+#section-splitter > .drag-handle {
+	width: 4px;
+	background-color: #ddd;
+	cursor: col-resize;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+}
+.cursor-col-resize #section-splitter > .drag-handle {
+	background-color: hsl(217, 99%, 65%);
+	background-color: -webkit-focus-ring-color;
+	border-color: hsl(217, 99%, 65%);
+	border-color: -webkit-focus-ring-color;
+}
+#section-splitter > .drag-handle::before,
+#section-splitter > .drag-handle::after {
+	display: block;
+	width: 5px;
+	height: 100%;
+	content: '';
+	position: absolute;
+}
+#section-splitter > .drag-handle::before {
+	transform: translateX(-6px);
+}
+#section-splitter > .drag-handle::after {
+	transform: translateX(4px);
+}
+
+#text-input {
+	border: none;
+	resize: none;
+	outline: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #fff;
+	background-position: 0 -1px;
+}
+
+#text-input:hover + .drag-handle::before {
+	pointer-events: none;
+}
+
+#config {
+	background-position: bottom left;
+	background-repeat: repeat-x;
+}
