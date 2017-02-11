@@ -15,6 +15,10 @@ import reducer, {
 	getGridStyle as getGridStyleFromState,
 } from './reducers';
 
+import {
+	setCols as setColsToState,
+} from './reducers/actions';
+
 import './styles';
 
 const devtools = (
@@ -34,16 +38,13 @@ var currentCols = getColsFromState(store.getState());
 
 function setCols (cols) {
 	currentCols = cols;
-	inputText.style.width = (CHAR_WIDTH * cols) + 'px';
+	store.dispatch(
+		setColsToState(cols)
+	);
 }
 
 function getCols () {
-	return Number(inputCols.value);
-}
-
-function resizeCols () {
-	const cols = getCols();
-	setCols(cols);
+	return getColsFromState(store.getState());
 }
 
 const INPUT_FONT = getFontStyleFromState(store.getState());
@@ -57,8 +58,6 @@ const rulerHorizontal = document.getElementById('ruler-horizontal');
 
 inputText.style.font = INPUT_FONT;
 inputText.value = getTextContentFromState(store.getState());
-
-setCols(currentCols);
 
 /* DRAG HANDLE */
 

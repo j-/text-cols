@@ -3,6 +3,8 @@ import Textarea from './Textarea';
 
 import {
 	getTextContent,
+	getCols,
+	getFontWidth,
 } from '../reducers';
 
 import {
@@ -11,6 +13,7 @@ import {
 
 const mapStateToProps = (state) => ({
 	textContent: getTextContent(state),
+	width: getCols(state) * getFontWidth(state),
 });
 
 const mapDispatchToProps = {
