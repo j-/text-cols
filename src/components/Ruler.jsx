@@ -17,28 +17,25 @@ export default class Ruler extends Component {
 	}
 
 	drawRuler () {
-		const CHAR_WIDTH = this.props.charWidth;
-
-		const RULERS_TO_RENDER = 100;
-		const RULER_WIDTH = CHAR_WIDTH * 5 * RULERS_TO_RENDER;
-		const RULER_HEIGHT = 10;
-		const RULER_TICKS = arrTimes([5, 5, 5, 5, 10], RULERS_TO_RENDER);
-		const RULER_TICK_COLOR = this.props.tickStyle;
+		const { charWidth, tickStyle, rulersToRender, height } = this.props;
+		const rulerWidth = charWidth * 5 * rulersToRender;
+		const rulerHeight = height;
+		const rulerTicks = arrTimes([5, 5, 5, 5, 10], rulersToRender);
 
 		const horizontalRulerCanvas = document.createElement('canvas');
 		const horizontalRulerContext = horizontalRulerCanvas.getContext('2d');
 
-		horizontalRulerCanvas.width = RULER_WIDTH;
-		horizontalRulerCanvas.height = RULER_HEIGHT;
+		horizontalRulerCanvas.width = rulerWidth;
+		horizontalRulerCanvas.height = rulerHeight;
 
-		horizontalRulerContext.strokeStyle = RULER_TICK_COLOR;
+		horizontalRulerContext.strokeStyle = tickStyle;
 		horizontalRulerContext.translate(0.5, 0);
 
 		drawHorizontalRuler(
 			horizontalRulerContext,
-			RULER_WIDTH,
-			RULER_HEIGHT,
-			RULER_TICKS
+			rulerWidth,
+			rulerHeight,
+			rulerTicks
 		);
 
 		return horizontalRulerCanvas.toDataURL();
@@ -70,6 +67,13 @@ export default class Ruler extends Component {
 Ruler.propTypes = {
 	charWidth: PropTypes.number.isRequired,
 	tickStyle: PropTypes.string.isRequired,
+	rulersToRender: PropTypes.number,
+	height: PropTypes.number,
+};
+
+Ruler.defaultProps = {
+	rulersToRender: 100,
+	height: 10,
 };
 
 function drawHorizontalRuler (ctx, width, height, ticks) {
