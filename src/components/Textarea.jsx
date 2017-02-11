@@ -57,6 +57,7 @@ export default class Textarea extends Component {
 				value={ textContent }
 				onChange={ (e) => setTextContent(e.target.value) }
 				style={{ width, backgroundImage, fontSize, tabSize }}
+				spellCheck={ false }
 			/>
 		);
 	}
