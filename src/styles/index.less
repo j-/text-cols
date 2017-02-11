@@ -14,29 +14,29 @@ body {
 	display: flex;
 	flex-direction: column;
 }
-#section-config {
-	height: 50px;
-}
 #section-splitter {
 	flex-grow: 1;
 	position: relative;
 	overflow: hidden;
 }
 
-#section-config {
+.config {
+	height: 50px;
 	line-height: 50px;
 	background-color: #fff;
 	z-index: 2;
 }
-#config > .form-group {
+.config > .form-group {
 	display: inline-block;
 }
-#config > .form-group > label,
-#config-cols,
-#config-tabwidth {
+.config > .form-group > label {
 	font-size: 1em;
 }
-#config > .form-group > label {
+.config input {
+	font-size: 1em;
+	width: 5em;
+}
+.config > .form-group > label {
 	padding: 0 1em;
 	font-weight: bold;
 }
