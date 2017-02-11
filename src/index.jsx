@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './components/App';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
+import { getTextWidth } from './measureText';
 
 import reducer, {
 	getCols as getColsFromState,
@@ -27,11 +28,6 @@ ReactDOM.render(
 
 var currentCols = getColsFromState(store.getState());
 
-function measureText (text, font) {
-	measureTextContext.font = font;
-	return measureTextContext.measureText(text).width;
-}
-
 function setCols (cols, updateInput) {
 	currentCols = cols;
 	if (updateInput) {
@@ -49,12 +45,9 @@ function resizeCols () {
 	setCols(cols, false);
 }
 
-const measureTextCanvas = document.createElement('canvas');
-const measureTextContext = measureTextCanvas.getContext('2d');
-
 const INPUT_FONT = getFontStyleFromState(store.getState());
 const TEST_CHAR = String.fromCharCode(0x20); // Space
-const CHAR_WIDTH = measureText(TEST_CHAR, INPUT_FONT);
+const CHAR_WIDTH = getTextWidth(TEST_CHAR, INPUT_FONT);
 const CHAR_HEIGHT = getFontSizeFromState(store.getState());
 
 const inputCols = document.getElementById('config-cols');
