@@ -17,7 +17,11 @@ import reducer, {
 
 import './styles';
 
-const store = createStore(reducer);
+const devtools = (
+	window.__REDUX_DEVTOOLS_EXTENSION__ &&
+	window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+const store = createStore(reducer, undefined, devtools);
 
 ReactDOM.render(
 	<Provider store={ store }>
