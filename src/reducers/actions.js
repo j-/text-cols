@@ -1,6 +1,6 @@
 import {
 	SET_COLS,
-	SET_TAB_WIDTH,
+	SET_TAB_SIZE,
 	SET_TEXT_CONTENT,
 	SET_FONT_SIZE,
 } from './types';
@@ -10,9 +10,9 @@ export const setCols = (cols) => ({
 	cols: Number(cols),
 });
 
-export const setTabWidth = (tabWidth) => ({
-	type: SET_TAB_WIDTH,
-	tabWidth: Number(tabWidth),
+export const setTabSize = (tabSize) => ({
+	type: SET_TAB_SIZE,
+	tabSize: Number(tabSize),
 });
 
 export const setFontSize = (size) => ({

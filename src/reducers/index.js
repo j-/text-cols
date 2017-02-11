@@ -4,14 +4,14 @@ import {
 
 import {
 	SET_COLS,
-	SET_TAB_WIDTH,
+	SET_TAB_SIZE,
 	SET_TEXT_CONTENT,
 	SET_FONT_SIZE,
 } from './types';
 
 const INITIAL_STATE = {
 	cols: 80,
-	tabWidth: 4,
+	tabSize: 4,
 	textContent: '',
 	fontSize: 18,
 	fontWidth: 10.8017578125,
@@ -27,10 +27,10 @@ export default (state = INITIAL_STATE, action) => {
 				...state,
 				cols: Math.max(action.cols, 1),
 			};
-		case SET_TAB_WIDTH:
+		case SET_TAB_SIZE:
 			return {
 				...state,
-				tabWidth: action.tabWidth,
+				tabSize: action.tabSize,
 			};
 		case SET_TEXT_CONTENT:
 			return {
@@ -52,7 +52,7 @@ export default (state = INITIAL_STATE, action) => {
 };
 
 export const getCols = (state) => state.cols;
-export const getTabWidth = (state) => state.tabWidth;
+export const getTabSize = (state) => state.tabSize;
 export const getTextContent = (state) => state.textContent;
 export const getFontSize = (state) => state.fontSize;
 export const getFontWidth = (state) => state.fontWidth;

@@ -3,25 +3,25 @@ import Config from './Config';
 
 import {
 	getCols,
-	getTabWidth,
+	getTabSize,
 	getFontSize,
 } from '../reducers';
 
 import {
 	setCols,
-	setTabWidth,
+	setTabSize,
 	setFontSize,
 } from '../reducers/actions';
 
 const mapStateToProps = (state) => ({
 	cols: getCols(state),
-	tabWidth: getTabWidth(state),
+	tabSize: getTabSize(state),
 	fontSize: getFontSize(state),
 });
 
 const mapDispatchToProps = {
 	setCols,
-	setTabWidth,
+	setTabSize,
 	setFontSize,
 };
 

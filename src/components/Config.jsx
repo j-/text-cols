@@ -2,10 +2,10 @@ import React, { PropTypes } from 'react';
 
 const Config = ({
 	cols,
-	tabWidth,
+	tabSize,
 	fontSize,
 	setCols,
-	setTabWidth,
+	setTabSize,
 	setFontSize,
 }) => (
 	<section id="section-config">
@@ -26,8 +26,8 @@ const Config = ({
 					id="config-tabwidth"
 					type="number"
 					min="1"
-					value={ tabWidth }
-					onChange={ (e) => setTabWidth(e.target.value) }
+					value={ tabSize }
+					onChange={ (e) => setTabSize(e.target.value) }
 				/>
 			</div>
 			<div className="form-group">
@@ -46,10 +46,10 @@ const Config = ({
 
 Config.propTypes = {
 	cols: PropTypes.number.isRequired,
-	tabWidth: PropTypes.number.isRequired,
+	tabSize: PropTypes.number.isRequired,
 	fontSize: PropTypes.number.isRequired,
 	setCols: PropTypes.func.isRequired,
-	setTabWidth: PropTypes.func.isRequired,
+	setTabSize: PropTypes.func.isRequired,
 	setFontSize: PropTypes.func.isRequired,
 };
 

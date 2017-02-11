@@ -46,9 +46,8 @@ export default class Textarea extends Component {
 	}
 
 	render () {
-		const { textContent, setTextContent, cols, fontSize, fontWidth, tabWidth } = this.props;
+		const { textContent, setTextContent, cols, fontSize, fontWidth, tabSize } = this.props;
 		const { backgroundImage } = this.state;
-		const tabSize = tabWidth;
 		const width = cols * fontWidth;
 		return (
 			<textarea
@@ -70,7 +69,7 @@ Textarea.propTypes = {
 	gridStyle: PropTypes.string.isRequired,
 	fontWidth: PropTypes.number.isRequired,
 	fontSize: PropTypes.number.isRequired,
-	tabWidth: PropTypes.number.isRequired,
+	tabSize: PropTypes.number.isRequired,
 };
 
 function drawVerticalGridLineSection (ctx, tickWidth, numTicks) {
