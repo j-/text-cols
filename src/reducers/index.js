@@ -10,6 +10,8 @@ const INITIAL_STATE = {
 	textContent: '',
 	fontSize: 18,
 	lineHeight: 1,
+	tickStyle: '#ccc',
+	gridStyle: '#eee',
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -44,3 +46,5 @@ export const getFontStyle = (state) => {
 	const lineHeight = getLineHeight(state);
 	return `${fontSize}px/${lineHeight} monospace`;
 };
+export const getTickStyle = (state) => state.tickStyle;
+export const getGridStyle = (state) => state.gridStyle;

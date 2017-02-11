@@ -10,6 +10,8 @@ import reducer, {
 	getTextContent as getTextContentFromState,
 	getFontSize as getFontSizeFromState,
 	getFontStyle as getFontStyleFromState,
+	getTickStyle as getTickStyleFromState,
+	getGridStyle as getGridStyleFromState,
 } from './reducers';
 
 import './styles';
@@ -197,7 +199,7 @@ const RULERS_TO_RENDER = 100;
 const RULER_WIDTH = CHAR_WIDTH * 5 * RULERS_TO_RENDER;
 const RULER_HEIGHT = 10;
 const RULER_TICKS = arrTimes([5, 5, 5, 5, 10], RULERS_TO_RENDER);
-const RULER_TICK_COLOR = '#ccc';
+const RULER_TICK_COLOR = getTickStyleFromState(store.getState());
 
 const horizontalRulerCanvas = document.createElement('canvas');
 const horizontalRulerContext = horizontalRulerCanvas.getContext('2d');
@@ -243,7 +245,7 @@ function drawHorizontalGridLineSection (ctx, tickHeight, numTicks) {
 }
 
 const GRID_LINES_TO_RENDER = 100 * 5;
-const GRID_LINE_COLOR = '#eee';
+const GRID_LINE_COLOR = getGridStyleFromState(store.getState());
 
 const gridLineSectionCanvas = document.createElement('canvas');
 const gridLineSectionContext = gridLineSectionCanvas.getContext('2d');
