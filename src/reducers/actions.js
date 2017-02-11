@@ -7,12 +7,12 @@ import {
 
 export const setCols = (cols) => ({
 	type: SET_COLS,
-	cols,
+	cols: Number(cols),
 });
 
 export const setTabWidth = (tabWidth) => ({
 	type: SET_TAB_WIDTH,
-	tabWidth,
+	tabWidth: Number(tabWidth),
 });
 
 export const setTextContent = (textContent) => ({

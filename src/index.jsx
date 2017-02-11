@@ -32,11 +32,8 @@ ReactDOM.render(
 
 var currentCols = getColsFromState(store.getState());
 
-function setCols (cols, updateInput) {
+function setCols (cols) {
 	currentCols = cols;
-	if (updateInput) {
-		inputCols.value = cols;
-	}
 	inputText.style.width = (CHAR_WIDTH * cols) + 'px';
 }
 
@@ -46,7 +43,7 @@ function getCols () {
 
 function resizeCols () {
 	const cols = getCols();
-	setCols(cols, false);
+	setCols(cols);
 }
 
 const INPUT_FONT = getFontStyleFromState(store.getState());
@@ -54,8 +51,6 @@ const TEST_CHAR = String.fromCharCode(0x20); // Space
 const CHAR_WIDTH = getTextWidth(TEST_CHAR, INPUT_FONT);
 const CHAR_HEIGHT = getFontSizeFromState(store.getState());
 
-const inputCols = document.getElementById('config-cols');
-const inputTabwidth = document.getElementById('config-tabwidth');
 const inputText = document.getElementById('text-input');
 const dragHandle = document.querySelector('#section-splitter > .drag-handle');
 const rulerHorizontal = document.getElementById('ruler-horizontal');
@@ -63,9 +58,7 @@ const rulerHorizontal = document.getElementById('ruler-horizontal');
 inputText.style.font = INPUT_FONT;
 inputText.value = getTextContentFromState(store.getState());
 
-inputCols.addEventListener('input', resizeCols);
-
-setCols(currentCols, true);
+setCols(currentCols);
 
 /* DRAG HANDLE */
 
@@ -230,7 +223,3 @@ function updateTabWidth () {
 	const width = getTabWidth();
 	setTabWidth(width);
 }
-
-inputTabwidth.addEventListener('input', updateTabWidth);
-
-setTabWidth(currentTabWidth);
