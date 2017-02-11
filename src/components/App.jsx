@@ -1,6 +1,6 @@
 import React from 'react';
 import Ruler from './RulerContainer';
-import Textarea from './Textarea';
+import Textarea from './TextareaContainer';
 
 const App = () => (
 	<div className="app">
