@@ -1,4 +1,5 @@
 import React from 'react';
+import Ruler from './RulerContainer';
 
 const App = () => (
 	<div className="app">
@@ -14,7 +15,7 @@ const App = () => (
 				</div>
 			</form>
 		</section>
-		<div id="ruler-horizontal" className="ruler"></div>
+		<Ruler />
 		<section id="section-splitter">
 			<textarea id="text-input" className="pane pane-left" placeholder="Type here..."></textarea>
 			<div className="drag-handle"></div>

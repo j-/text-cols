@@ -170,62 +170,6 @@ dragHandle.addEventListener('mousedown', function (e) {
 	setupDragListeners();
 });
 
-/* RULER */
-
-function drawHorizontalRuler (ctx, width, height, ticks) {
-	const numTicks = ticks.length;
-	const tickWidth = width / numTicks;
-	var x, y;
-	for (var i = 0; i < numTicks; i++) {
-		x = (i + 1) * tickWidth;
-		y = height - ticks[i];
-		ctx.beginPath();
-		ctx.moveTo(x, y);
-		ctx.lineTo(x, height);
-		ctx.closePath();
-		ctx.stroke();
-	}
-}
-
-function arrTimes (arr, times) {
-	const result = [];
-	for (var i = 0; i < times; i++) {
-		result.splice(result.length, 0, ...arr);
-	}
-	return result;
-}
-
-const RULERS_TO_RENDER = 100;
-const RULER_WIDTH = CHAR_WIDTH * 5 * RULERS_TO_RENDER;
-const RULER_HEIGHT = 10;
-const RULER_TICKS = arrTimes([5, 5, 5, 5, 10], RULERS_TO_RENDER);
-const RULER_TICK_COLOR = getTickStyleFromState(store.getState());
-
-const horizontalRulerCanvas = document.createElement('canvas');
-const horizontalRulerContext = horizontalRulerCanvas.getContext('2d');
-
-horizontalRulerCanvas.width = RULER_WIDTH;
-horizontalRulerCanvas.height = RULER_HEIGHT;
-
-horizontalRulerContext.strokeStyle = RULER_TICK_COLOR;
-horizontalRulerContext.translate(0.5, 0);
-
-drawHorizontalRuler(
-	horizontalRulerContext,
-	RULER_WIDTH,
-	RULER_HEIGHT,
-	RULER_TICKS
-);
-
-const rulerDataURL = horizontalRulerCanvas.toDataURL();
-rulerHorizontal.style.backgroundImage = 'url(' + rulerDataURL + ')';
-
-rulerHorizontal.addEventListener('mousemove', (e) => {
-	const x = e.offsetX;
-	const i = Math.round(x / CHAR_WIDTH);
-	rulerHorizontal.title = i;
-});
-
 /* GRID LINES */
 
 function drawVerticalGridLineSection (ctx, tickWidth, numTicks) {
