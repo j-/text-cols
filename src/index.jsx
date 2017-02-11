@@ -158,21 +158,3 @@ dragHandle.addEventListener('mousedown', function (e) {
 	initializePosition(e);
 	setupDragListeners();
 });
-
-/* TAB WIDTH */
-
-var currentTabWidth = getTabWidthFromState(store.getState());
-
-function setTabWidth (width) {
-	inputText.style.tabSize = width;
-	inputTabwidth.value = width;
-}
-
-function getTabWidth () {
-	return Number(inputTabwidth.value);
-}
-
-function updateTabWidth () {
-	const width = getTabWidth();
-	setTabWidth(width);
-}
