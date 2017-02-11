@@ -1,0 +1,19 @@
+{
+  "name": "text-cols",
+  "version": "0.0.0",
+  "description": "Resize a textarea by columns",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/j-/text-cols.git"
+  },
+  "author": "Jamie Hoeks <j@skeoh.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/j-/text-cols/issues"
+  },
+  "homepage": "https://github.com/j-/text-cols#readme"
+}
