@@ -6,18 +6,18 @@ export default class Ruler extends Component {
 		this.handleMouseMove = this.handleMouseMove.bind(this);
 		this.state = {
 			title: null,
-			rulerDataURL: this.drawRuler(),
+			rulerDataURL: this.drawRuler(this.props),
 		};
 	}
 
 	componentWillReceiveProps (props) {
 		this.setState({
-			rulerDataURL: this.drawRuler(),
+			rulerDataURL: this.drawRuler(props),
 		});
 	}
 
-	drawRuler () {
-		const { charWidth, tickStyle, rulersToRender, height } = this.props;
+	drawRuler (props) {
+		const { charWidth, tickStyle, rulersToRender, height } = props;
 		const rulerWidth = charWidth * 5 * rulersToRender;
 		const rulerHeight = height;
 		const rulerTicks = arrTimes([5, 5, 5, 5, 10], rulersToRender);
