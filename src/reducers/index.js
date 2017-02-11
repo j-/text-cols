@@ -25,7 +25,7 @@ export default (state = INITIAL_STATE, action) => {
 		case SET_COLS:
 			return {
 				...state,
-				cols: action.cols,
+				cols: Math.max(action.cols, 1),
 			};
 		case SET_TAB_WIDTH:
 			return {
