@@ -9,15 +9,15 @@ import {
 	setTextContent,
 } from '../reducers/actions';
 
-const connectStateToProps = (state) => ({
+const mapStateToProps = (state) => ({
 	textContent: getTextContent(state),
 });
 
-const connectDispatchToProps = {
+const mapDispatchToProps = {
 	setTextContent,
 };
 
 export default connect(
-	connectStateToProps,
-	connectDispatchToProps
+	mapStateToProps,
+	mapDispatchToProps
 )(Textarea);

@@ -6,11 +6,11 @@ import {
 	getTickStyle,
 } from '../reducers';
 
-const connectStateToProps = (state) => ({
+const mapStateToProps = (state) => ({
 	charWidth: getFontWidth(state),
 	tickStyle: getTickStyle(state),
 });
 
 export default connect(
-	connectStateToProps
+	mapStateToProps
 )(Ruler);
