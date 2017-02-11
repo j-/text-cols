@@ -159,52 +159,6 @@ dragHandle.addEventListener('mousedown', function (e) {
 	setupDragListeners();
 });
 
-/* GRID LINES */
-
-function drawVerticalGridLineSection (ctx, tickWidth, numTicks) {
-	var x;
-	for (var i = 0; i < numTicks; i++) {
-		x = (i + 1) * tickWidth;
-		ctx.fillRect(x, 0, 1, 1);
-	}
-}
-
-function drawHorizontalGridLineSection (ctx, tickHeight, numTicks) {
-	var y;
-	for (var i = 0; i < numTicks; i++) {
-		y = (i + 1) * tickHeight;
-		ctx.fillRect(0, y, 1, 1);
-	}
-}
-
-const GRID_LINES_TO_RENDER = 100 * 5;
-const GRID_LINE_COLOR = getGridStyleFromState(store.getState());
-
-const gridLineSectionCanvas = document.createElement('canvas');
-const gridLineSectionContext = gridLineSectionCanvas.getContext('2d');
-
-gridLineSectionCanvas.width = CHAR_WIDTH * GRID_LINES_TO_RENDER;
-gridLineSectionCanvas.height = 1;
-
-gridLineSectionContext.fillStyle = GRID_LINE_COLOR;
-gridLineSectionContext.translate(0.5, 0);
-
-drawVerticalGridLineSection(gridLineSectionContext, CHAR_WIDTH, GRID_LINES_TO_RENDER);
-
-const vertialLinesDataURL = gridLineSectionCanvas.toDataURL();
-
-gridLineSectionCanvas.width = 1;
-gridLineSectionCanvas.height = CHAR_HEIGHT * GRID_LINES_TO_RENDER;
-
-gridLineSectionContext.fillStyle = GRID_LINE_COLOR;
-gridLineSectionContext.translate(0, 1.5);
-
-drawHorizontalGridLineSection(gridLineSectionContext, CHAR_HEIGHT, GRID_LINES_TO_RENDER);
-
-const horizontalLinesDataURL = gridLineSectionCanvas.toDataURL();
-
-inputText.style.backgroundImage = 'url("' + vertialLinesDataURL + '"), url("' + horizontalLinesDataURL + '")';
-
 /* TAB WIDTH */
 
 var currentTabWidth = getTabWidthFromState(store.getState());

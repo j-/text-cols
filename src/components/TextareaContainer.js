@@ -5,6 +5,8 @@ import {
 	getTextContent,
 	getCols,
 	getFontWidth,
+	getFontSize,
+	getGridStyle,
 } from '../reducers';
 
 import {
@@ -12,8 +14,11 @@ import {
 } from '../reducers/actions';
 
 const mapStateToProps = (state) => ({
+	cols: getCols(state),
 	textContent: getTextContent(state),
-	width: getCols(state) * getFontWidth(state),
+	fontWidth: getFontWidth(state),
+	fontSize: getFontSize(state),
+	gridStyle: getGridStyle(state),
 });
 
 const mapDispatchToProps = {
