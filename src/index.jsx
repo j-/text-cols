@@ -1,15 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+
+import reducer, {
+	getCols as getColsFromState,
+	getTabWidth as getTabWidthFromState,
+	getTextContent as getTextContentFromState,
+	getFontSize as getFontSizeFromState,
+	getFontStyle as getFontStyleFromState,
+} from './reducers';
 
 import './styles';
 
+const store = createStore(reducer);
+
 ReactDOM.render(
-	<App />,
+	<Provider store={ store }>
+		<App />
+	</Provider>,
 	document.getElementById('app')
 );
 
-var currentCols = 80;
+var currentCols = getColsFromState(store.getState());
 
 function measureText (text, font) {
 	measureTextContext.font = font;
@@ -18,7 +32,6 @@ function measureText (text, font) {
 
 function setCols (cols, updateInput) {
 	currentCols = cols;
-	localStorage.setItem(STORAGE_KEY_COLS, cols);
 	if (updateInput) {
 		inputCols.value = cols;
 	}
@@ -37,14 +50,10 @@ function resizeCols () {
 const measureTextCanvas = document.createElement('canvas');
 const measureTextContext = measureTextCanvas.getContext('2d');
 
-const STORAGE_KEY_TEXT = 'app-text-value';
-const STORAGE_KEY_COLS = 'app-cols-value';
-const STORAGE_KEY_TABS = 'app-tabs-value';
-
-const INPUT_FONT = '18px/1 monospace';
+const INPUT_FONT = getFontStyleFromState(store.getState());
 const TEST_CHAR = String.fromCharCode(0x20); // Space
 const CHAR_WIDTH = measureText(TEST_CHAR, INPUT_FONT);
-const CHAR_HEIGHT = 18;
+const CHAR_HEIGHT = getFontSizeFromState(store.getState());
 
 const inputCols = document.getElementById('config-cols');
 const inputTabwidth = document.getElementById('config-tabwidth');
@@ -53,22 +62,9 @@ const dragHandle = document.querySelector('#section-splitter > .drag-handle');
 const rulerHorizontal = document.getElementById('ruler-horizontal');
 
 inputText.style.font = INPUT_FONT;
+inputText.value = getTextContentFromState(store.getState());
 
 inputCols.addEventListener('input', resizeCols);
-
-const localStorageCols = localStorage.getItem(STORAGE_KEY_COLS)
-if (localStorageCols) {
-	currentCols = localStorageCols;
-}
-
-const localStorageText = localStorage.getItem(STORAGE_KEY_TEXT);
-if (localStorageText) {
-	inputText.value = localStorageText;
-}
-
-inputText.addEventListener('input', function () {
-	localStorage.setItem(STORAGE_KEY_TEXT, inputText.value);
-});
 
 setCols(currentCols, true);
 
@@ -276,15 +272,9 @@ inputText.style.backgroundImage = 'url("' + vertialLinesDataURL + '"), url("' + 
 
 /* TAB WIDTH */
 
-var currentTabWidth = 4;
-
-const localStorageTabWidth = localStorage.getItem(STORAGE_KEY_TABS);
-if (localStorageTabWidth) {
-	currentTabWidth = localStorageTabWidth;
-}
+var currentTabWidth = getTabWidthFromState(store.getState());
 
 function setTabWidth (width) {
-	localStorage.setItem(STORAGE_KEY_TABS, width);
 	inputText.style.tabSize = width;
 	inputTabwidth.value = width;
 }
