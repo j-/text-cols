@@ -15,33 +15,9 @@ import reducer, {
 	getGridStyle as getGridStyleFromState,
 } from './reducers';
 
-import {
-	setFontWidth,
-} from './reducers/actions';
-
 import './styles';
 
 const store = createStore(reducer);
-
-const when = (selector, callback, stored = selector()) => (...args) => {
-	const value = selector(...args);
-	if (value !== stored) {
-		stored = value;
-		callback(value);
-	}
-};
-
-store.subscribe(when(
-	() => getFontStyleFromState(store.getState()),
-	(fontStyle) => store.dispatch(
-		setFontWidth(
-			getTextWidth(
-				'\xa0', // Non-breaking space character
-				fontStyle
-			)
-		)
-	)
-));
 
 ReactDOM.render(
 	<Provider store={ store }>

@@ -3,7 +3,6 @@ import {
 	SET_TAB_WIDTH,
 	SET_TEXT_CONTENT,
 	SET_FONT_SIZE,
-	SET_FONT_WIDTH,
 } from './types';
 
 export const setCols = (cols) => ({
@@ -24,9 +23,4 @@ export const setTextContent = (textContent) => ({
 export const setFontSize = (size) => ({
 	type: SET_FONT_SIZE,
 	size,
-});
-
-export const setFontWidth = (width) => ({
-	type: SET_FONT_WIDTH,
-	width,
 });

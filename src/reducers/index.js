@@ -1,9 +1,12 @@
 import {
+	getTextWidth,
+} from '../measureText';
+
+import {
 	SET_COLS,
 	SET_TAB_WIDTH,
 	SET_TEXT_CONTENT,
 	SET_FONT_SIZE,
-	SET_FONT_WIDTH,
 } from './types';
 
 const INITIAL_STATE = {
@@ -38,11 +41,10 @@ export default (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				fontSize: action.size,
-			};
-		case SET_FONT_WIDTH:
-			return {
-				...state,
-				fontWidth: action.width,
+				fontWidth: getTextWidth('\xa0', getFontStyle({
+					...state,
+					fontSize: action.size,
+				})),
 			};
 		default:
 			return state;
