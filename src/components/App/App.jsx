@@ -4,8 +4,12 @@ import Ruler from '../Ruler';
 import Textarea from '../Textarea';
 import DragHandle from '../DragHandle';
 
+import {
+	app,
+} from './styles';
+
 const App = () => (
-	<div className="app">
+	<div className={ app }>
 		<Config />
 		<Ruler />
 		<section className="section-splitter">

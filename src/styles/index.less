@@ -6,22 +6,9 @@ body {
 	padding: 0;
 	font: 16px Arial, sans-serif;
 }
+
 .cursor-col-resize * {
 	cursor: col-resize !important;
-}
-.app {
-	min-height: 100vh;
-	display: flex;
-	flex-direction: column;
-}
-
-.ruler-horizontal {
-	background-color: #fff;
-	border-top: 1px solid #eee;
-	border-bottom: 1px solid #ccc;
-	height: 20px;
-	background-position: bottom left;
-	background-repeat: repeat-x;
 }
 
 .section-splitter {
@@ -32,6 +19,7 @@ body {
 	flex-direction: row;
 	background: #ddd url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAHElEQVQokWP4//+/MS7MgA+MaqSFxsHlmpGuEQByazhwczcltgAAAABJRU5ErkJggg==) top right;
 }
+
 .section-splitter > .drag-handle {
 	width: 4px;
 	background-color: #ddd;
@@ -39,12 +27,14 @@ body {
 	border-left: 1px solid #ccc;
 	border-right: 1px solid #ccc;
 }
+
 .cursor-col-resize .section-splitter > .drag-handle {
 	background-color: hsl(217, 99%, 65%);
 	background-color: -webkit-focus-ring-color;
 	border-color: hsl(217, 99%, 65%);
 	border-color: -webkit-focus-ring-color;
 }
+
 .section-splitter > .drag-handle::before,
 .section-splitter > .drag-handle::after {
 	display: block;
@@ -53,9 +43,11 @@ body {
 	content: '';
 	position: absolute;
 }
+
 .section-splitter > .drag-handle::before {
 	transform: translateX(-6px);
 }
+
 .section-splitter > .drag-handle::after {
 	transform: translateX(4px);
 }

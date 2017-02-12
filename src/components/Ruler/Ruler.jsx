@@ -1,5 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 
+import {
+	rulerHorizontal,
+} from './styles';
+
 export default class Ruler extends Component {
 	constructor (props) {
 		super(props);
@@ -53,7 +57,7 @@ export default class Ruler extends Component {
 		const { title, rulerDataURL } = this.state;
 		return (
 			<div
-				className="ruler ruler-horizontal"
+				className={ rulerHorizontal }
 				onMouseMove={ this.handleMouseMove }
 				title={ title }
 				style={{
