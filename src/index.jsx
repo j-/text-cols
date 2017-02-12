@@ -6,13 +6,8 @@ import { Provider } from 'react-redux';
 import { getTextWidth } from './measureText';
 
 import reducer, {
-	getCols as getColsFromState,
-	getTabWidth as getTabWidthFromState,
-	getTextContent as getTextContentFromState,
-	getFontSize as getFontSizeFromState,
-	getFontStyle as getFontStyleFromState,
-	getTickStyle as getTickStyleFromState,
-	getGridStyle as getGridStyleFromState,
+	getCols,
+	getFontWidth,
 } from './reducers';
 
 import {
@@ -34,51 +29,37 @@ ReactDOM.render(
 	document.getElementById('app')
 );
 
-var currentCols = getColsFromState(store.getState());
+const dragHandle = document.querySelector('#section-splitter > .drag-handle');
 
-function setCols (cols) {
-	currentCols = cols;
+/* DRAG HANDLE */
+
+let initialWidth = null;
+let initialX = null;
+let initialY = null;
+let initialOffsetX = null;
+let initialOffsetY = null;
+let currentX = null;
+let currentY = null;
+let initialCols = null;
+
+function handleDragging () {
+	const newWidth = Math.max(currentX, 0);
+	const charWidth = getFontWidth(store.getState());
+	const cols = Math.round(newWidth / charWidth);
 	store.dispatch(
 		setColsToState(cols)
 	);
 }
 
-function getCols () {
-	return getColsFromState(store.getState());
-}
-
-const INPUT_FONT = getFontStyleFromState(store.getState());
-const TEST_CHAR = String.fromCharCode(0x20); // Space
-const CHAR_WIDTH = getTextWidth(TEST_CHAR, INPUT_FONT);
-const CHAR_HEIGHT = getFontSizeFromState(store.getState());
-
-const dragHandle = document.querySelector('#section-splitter > .drag-handle');
-const rulerHorizontal = document.getElementById('ruler-horizontal');
-
-/* DRAG HANDLE */
-
-var initialWidth = null;
-var initialX = null;
-var initialY = null;
-var initialOffsetX = null;
-var initialOffsetY = null;
-var currentX = null;
-var currentY = null;
-var initialCols = null;
-
-function handleDragging () {
-	var newWidth = Math.max(currentX, 0);
-	newWidth = Math.round(newWidth / CHAR_WIDTH);
-	setCols(newWidth, true);
-}
-
 function handleStartDragging () {
-	initialCols = currentCols;
+	initialCols = getCols(store.getState());
 	document.body.classList.add('cursor-col-resize');
 }
 
 function handleCancelDragging () {
-	setCols(initialCols, true);
+	store.dispatch(
+		setColsToState(initialCols)
+	);
 }
 
 function handleStopDragging () {
@@ -148,6 +129,8 @@ function setupDragListeners () {
 
 dragHandle.addEventListener('mousedown', function (e) {
 	if (e.which !== 1) {
+		// Left click to drag only
+		// Exit early
 		return;
 	}
 	e.preventDefault();
