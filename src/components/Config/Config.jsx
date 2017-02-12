@@ -1,5 +1,10 @@
 import React, { PropTypes } from 'react';
 
+import {
+	config,
+	formGroup,
+} from './styles';
+
 const Config = ({
 	cols,
 	tabSize,
@@ -8,8 +13,8 @@ const Config = ({
 	setTabSize,
 	setFontSize,
 }) => (
-	<form className="config">
-		<div className="form-group">
+	<form className={ config }>
+		<div className={ formGroup }>
 			<label htmlFor="config-cols">Cols</label>
 			<input
 				id="config-cols"
@@ -19,7 +24,7 @@ const Config = ({
 				onChange={ (e) => setCols(e.target.value) }
 			/>
 		</div>
-		<div className="form-group">
+		<div className={ formGroup }>
 			<label htmlFor="config-tabwidth">Tab width</label>
 			<input
 				id="config-tabwidth"
@@ -29,7 +34,7 @@ const Config = ({
 				onChange={ (e) => setTabSize(e.target.value) }
 			/>
 		</div>
-		<div className="form-group">
+		<div className={ formGroup }>
 			<label htmlFor="config-fontsize">Font size (px)</label>
 			<input
 				id="config-fontsize"
