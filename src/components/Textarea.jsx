@@ -17,12 +17,15 @@ export default class Textarea extends Component {
 	getBackgroundImageStyle (props) {
 		const { gridStyle, fontWidth, fontSize } = props;
 
-		const GRID_LINES_TO_RENDER = 100 * 5;
+		const GRID_LINES_TO_RENDER = 250;
 
 		const gridLineSectionCanvas = document.createElement('canvas');
 		const gridLineSectionContext = gridLineSectionCanvas.getContext('2d');
 
-		gridLineSectionCanvas.width = fontWidth * GRID_LINES_TO_RENDER;
+		gridLineSectionCanvas.width = Math.min(
+			fontWidth * GRID_LINES_TO_RENDER,
+			10000
+		);
 		gridLineSectionCanvas.height = 1;
 
 		gridLineSectionContext.fillStyle = gridStyle;
@@ -33,7 +36,10 @@ export default class Textarea extends Component {
 		const verticalLinesDataURL = gridLineSectionCanvas.toDataURL();
 
 		gridLineSectionCanvas.width = 1;
-		gridLineSectionCanvas.height = fontSize * GRID_LINES_TO_RENDER;
+		gridLineSectionCanvas.height = Math.min(
+			fontSize * GRID_LINES_TO_RENDER,
+			10000
+		);
 
 		gridLineSectionContext.fillStyle = gridStyle;
 		gridLineSectionContext.translate(0, 1.5);

@@ -25,7 +25,7 @@ export default class Ruler extends Component {
 		const horizontalRulerCanvas = document.createElement('canvas');
 		const horizontalRulerContext = horizontalRulerCanvas.getContext('2d');
 
-		horizontalRulerCanvas.width = rulerWidth;
+		horizontalRulerCanvas.width = Math.min(rulerWidth, 10000);
 		horizontalRulerCanvas.height = rulerHeight;
 
 		horizontalRulerContext.strokeStyle = tickStyle;
@@ -72,7 +72,7 @@ Ruler.propTypes = {
 };
 
 Ruler.defaultProps = {
-	rulersToRender: 100,
+	rulersToRender: 50,
 	height: 10,
 };
 
