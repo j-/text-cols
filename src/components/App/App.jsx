@@ -1,8 +1,8 @@
 import React from 'react';
-import Config from './ConfigContainer';
-import Ruler from './RulerContainer';
-import Textarea from './TextareaContainer';
-import DragHandle from './DragHandleContainer';
+import Config from '../Config';
+import Ruler from '../Ruler';
+import Textarea from '../Textarea';
+import DragHandle from '../DragHandle';
 
 const App = () => (
 	<div className="app">

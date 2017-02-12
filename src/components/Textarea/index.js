@@ -9,11 +9,11 @@ import {
 	getFontSize,
 	getGridStyle,
 	getTabSize,
-} from '../reducers';
+} from '../../reducers';
 
 import {
 	setTextContent,
-} from '../reducers/actions';
+} from '../../reducers/actions';
 
 const mapStateToProps = (state) => ({
 	cols: getCols(state),

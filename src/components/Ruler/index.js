@@ -4,7 +4,7 @@ import Ruler from './Ruler';
 import {
 	getFontWidth,
 	getTickStyle,
-} from '../reducers';
+} from '../../reducers';
 
 const mapStateToProps = (state) => ({
 	charWidth: getFontWidth(state),

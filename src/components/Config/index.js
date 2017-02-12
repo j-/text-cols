@@ -1,25 +1,31 @@
 import { connect } from 'react-redux';
-import DragHandle from './DragHandle';
+import Config from './Config';
 
 import {
 	getCols,
-	getFontWidth,
-} from '../reducers';
+	getTabSize,
+	getFontSize,
+} from '../../reducers';
 
 import {
 	setCols,
-} from '../reducers/actions';
+	setTabSize,
+	setFontSize,
+} from '../../reducers/actions';
 
 const mapStateToProps = (state) => ({
 	cols: getCols(state),
-	fontWidth: getFontWidth(state),
+	tabSize: getTabSize(state),
+	fontSize: getFontSize(state),
 });
 
 const mapDispatchToProps = {
 	setCols,
+	setTabSize,
+	setFontSize,
 };
 
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(DragHandle);
+)(Config);
