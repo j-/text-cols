@@ -8,10 +8,9 @@ const App = () => (
 	<div className="app">
 		<Config />
 		<Ruler />
-		<section id="section-splitter">
+		<section className="section-splitter">
 			<Textarea />
 			<DragHandle />
-			<section className="pane pane-right"></section>
 		</section>
 	</div>
 );

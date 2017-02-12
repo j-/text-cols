@@ -14,11 +14,6 @@ body {
 	display: flex;
 	flex-direction: column;
 }
-#section-splitter {
-	flex-grow: 1;
-	position: relative;
-	overflow: hidden;
-}
 
 .config {
 	height: 50px;
@@ -50,39 +45,39 @@ body {
 	background-repeat: repeat-x;
 }
 
-#section-splitter {
+.section-splitter {
+	flex-grow: 1;
+	position: relative;
+	overflow: hidden;
 	display: flex;
 	flex-direction: row;
-}
-#section-splitter > .pane-right {
-	flex-grow: 1;
 	background: #ddd url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAHElEQVQokWP4//+/MS7MgA+MaqSFxsHlmpGuEQByazhwczcltgAAAABJRU5ErkJggg==) top right;
 }
-#section-splitter > .drag-handle {
+.section-splitter > .drag-handle {
 	width: 4px;
 	background-color: #ddd;
 	cursor: col-resize;
 	border-left: 1px solid #ccc;
 	border-right: 1px solid #ccc;
 }
-.cursor-col-resize #section-splitter > .drag-handle {
+.cursor-col-resize .section-splitter > .drag-handle {
 	background-color: hsl(217, 99%, 65%);
 	background-color: -webkit-focus-ring-color;
 	border-color: hsl(217, 99%, 65%);
 	border-color: -webkit-focus-ring-color;
 }
-#section-splitter > .drag-handle::before,
-#section-splitter > .drag-handle::after {
+.section-splitter > .drag-handle::before,
+.section-splitter > .drag-handle::after {
 	display: block;
 	width: 5px;
 	height: 100%;
 	content: '';
 	position: absolute;
 }
-#section-splitter > .drag-handle::before {
+.section-splitter > .drag-handle::before {
 	transform: translateX(-6px);
 }
-#section-splitter > .drag-handle::after {
+.section-splitter > .drag-handle::after {
 	transform: translateX(4px);
 }
 
@@ -99,9 +94,4 @@ body {
 
 .text-input:hover + .drag-handle::before {
 	pointer-events: none;
-}
-
-#config {
-	background-position: bottom left;
-	background-repeat: repeat-x;
 }
