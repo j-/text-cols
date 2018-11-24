@@ -6,7 +6,9 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack -p",
     "start": "webpack-dev-server --inline --content-base dist/",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
@@ -17,7 +19,7 @@
   "bugs": {
     "url": "https://github.com/j-/text-cols/issues"
   },
-  "homepage": "https://github.com/j-/text-cols#readme",
+  "homepage": "https://skeoh.com/text-cols",
   "devDependencies": {
     "babel-core": "^6.22.1",
     "babel-loader": "^6.2.10",
@@ -26,6 +28,7 @@
     "babel-preset-react": "^6.22.0",
     "cross-env": "^3.1.4",
     "css-loader": "^0.26.1",
+    "gh-pages": "^2.0.1",
     "html-webpack-plugin": "^2.28.0",
     "less": "^2.7.2",
     "less-loader": "^2.2.3",
